@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id                String @id @default(uuid())
+  name              String
+  email             String @unique
+  invoices          Invoice[] @relation("UserInvoices")
+}
+
+
+
+model Invoice {
+  id            String        @id
+  name          String
+  issuerName    String        @default("")
+  issuerAddress String        @default("")
+  clientName    String        @default("")
+  clientAddress String        @default("")
+  invoiceDate   String        @default("")
+  dueDate       String        @default("")
+  vatActive     Boolean       @default(false)
+  vatRate       Float         @default(20)
+  status        Int           @default(1)
+  lines         InvoiceLine[] @relation("InvoiceLines")
+  userId        String
+  createdById   User          @relation("UserInvoices", fields: [userId], references: [id])
+}
+
+model InvoiceLine {
+  id          String   @id @default(uuid())
+  description String   @default("")
+  quantity    Int      @default(0)
+  unitPrice   Float    @default(0)
+  invoiceId   String?
+  invoice     Invoice? @relation("InvoiceLines", fields: [invoiceId], references: [id], onDelete: Cascade)
+}
