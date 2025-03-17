@@ -1,3 +1,15 @@
+💼 Gestion des Factures - Fullstack App
+Une application complète de gestion des factures, développée avec Next.js, Prisma et SQLite. Elle permet de créer, modifier, supprimer et exporter des factures en PDF, tout en assurant un suivi des paiements.
+
+🚀 Technologies utilisées
+Frontend & Backend : Next.js
+ORM : Prisma
+Base de données : SQLite
+Authentification : Clerk
+
+![Description de l'image](/public/image.png)
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
